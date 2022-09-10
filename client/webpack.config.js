@@ -7,8 +7,8 @@ module.exports = () => {
   return {
     mode: 'development',
     entry: {
-      main: './src/js/index.js',
-      install: './src/js/install.js'
+      main: './src/index.js',
+      install: './src/install.js'
     },
     output: {
       filename: '[name].bundle.js',
@@ -20,12 +20,14 @@ module.exports = () => {
         title: "WyrdWright",
       }),
       new InjectManifest({
-        swSrc: "./src/src-sw.js",
-        swDest: "./src/src-sw.js",
+        swSrc: "./src-sw.js",
+        swDest: "./src-sw.js",
       }),
       new WebpackPwaManifest({
         name: "WyrdWright Application",
         short_name: "WyrdWright",
+        fingerprints: false,
+        inject: true,
         description: "Text editor online!",
         background_color: "#7eb4e2",
         theme_color: "#7eb4e2",
@@ -53,7 +55,11 @@ module.exports = () => {
           use: {
             loader: "babel-loader",
             options: {
-              presets: [["@babel/preset-env", { targets: "defaults" }]],
+              presets: ["@babel/preset-env"],
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/transform-runtime",
+              ],
             },
           },
         },
