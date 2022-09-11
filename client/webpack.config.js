@@ -7,8 +7,8 @@ module.exports = () => {
   return {
     mode: 'development',
     entry: {
-      main: './src/index.js',
-      install: './src/install.js'
+      main: './src/js/index.js',
+      install: './src/js/install.js'
     },
     output: {
       filename: '[name].bundle.js',
@@ -21,7 +21,7 @@ module.exports = () => {
       }),
       new InjectManifest({
         swSrc: "./src-sw.js",
-        swDest: "./src-sw.js",
+        swDest: "src-sw.js",
       }),
       new WebpackPwaManifest({
         name: "WyrdWright Application",
